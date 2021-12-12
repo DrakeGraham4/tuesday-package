@@ -13,7 +13,10 @@ const packages = [
 
     { heavy: true, priority: false, fragile: true, to: 'Justin', trackingNumber: 'suz2367' }
 ]
-function draw() {
+
+
+function draw(packages) {
+    console.log('drawing these packages', packages);
     let template = ''
     for (let i = 0; i < packages.length; i++) {
         let package = packages[i]
@@ -33,51 +36,63 @@ function draw() {
     }
     document.getElementById('packages').innerHTML = template
 }
-function filterHeavy() {
-    let heavyPackages = packages.filter(p => p.heavy)
-    let template = ''
-    for (let i = 0; i < heavyPackages.length; i++) {
-        const package = heavyPackages[i];
-        template += `
-        <div class="col-md-3">
-        <div class="card">
-        <div class="card-body">
-        <h6>Package shipped to: ${package.to}</h6>
-        <h6>Heavy: ${package.heavy}</h6>
-        <h6>Priority: ${package.priority}</h6>
-        <h6>Fragile: ${package.fragile}
-        <h6>Tracking Number: ${package.trackingNumber}
-        </div>
-        </div>
-        </div>
-        `
-    }
-    document.getElementById('packages').innerHTML = template
+
+
+function filterHeavy(choice) {
+    console.log('choice', choice)
+    // REVIEW this works, not 100% on why, the => confuses me still
+    // \/Array of packages where        \/p (package) is true
+    let heavyPackages = packages.filter(p => p.heavy == choice)
+    console.log('your filtered packages', heavyPackages);
+    draw(heavyPackages)
+    // let template = ''
+    // for (let i = 0; i < heavyPackages.length; i++) {
+    //     const package = heavyPackages[i];
+    //     template += `
+    //     <div class="col-md-3">
+    //     <div class="card">
+    //     <div class="card-body">
+    //     <h6>Package shipped to: ${package.to}</h6>
+    //     <h6>Heavy: ${package.heavy}</h6>
+    //     <h6>Priority: ${package.priority}</h6>
+    //     <h6>Fragile: ${package.fragile}
+    //     <h6>Tracking Number: ${package.trackingNumber}
+    //     </div>
+    //     </div>
+    //     </div>
+    //     `
+    // }
+    // document.getElementById('packages').innerHTML = template
 
 
 }
 function filterTracking() {
     let trackingNumber = packages.filter(p => p.trackingNumber)
-    let template = ''
-    for (let i = 0; i < trackingNumber.length; i++) {
-        const package = trackingNumber[i];
-        template += `
-        <div class="col-md-3">
-        <div class="card">
-        <div class="card-body">
-        <h6>Package shipped to: ${package.to}</h6>
-        <h6>Heavy: ${package.heavy}</h6>
-        <h6>Priority: ${package.priority}</h6>
-        <h6>Fragile: ${package.fragile}
-        <h6>Tracking Number: ${package.trackingNumber}
-        </div>
-        </div>
-        </div>
-        `
-    }
-    document.getElementById('packages').innerHTML = template
+    draw(trackingNumber)
+    // let template = ''
+    // for (let i = 0; i < trackingNumber.length; i++) {
+    //     const package = trackingNumber[i];
+    //     template += `
+    //     <div class="col-md-3">
+    //     <div class="card">
+    //     <div class="card-body">
+    //     <h6>Package shipped to: ${package.to}</h6>
+    //     <h6>Heavy: ${package.heavy}</h6>
+    //     <h6>Priority: ${package.priority}</h6>
+    //     <h6>Fragile: ${package.fragile}
+    //     <h6>Tracking Number: ${package.trackingNumber}
+    //     </div>
+    //     </div>
+    //     </div>
+    //     `
+    // }
+    // document.getElementById('packages').innerHTML = template
+}
+function filterPriority() {
+    // TODO filter packages where priority == true
+    let priorityPackages
 }
 
 
 
-draw()
+draw(packages)
